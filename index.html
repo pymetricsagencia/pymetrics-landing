@@ -1,613 +1,409 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pymetrics — Claridad total en los números de tu pyme</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pymetrics · ¿Sabés cuánto ganaste esta semana?</title>
+<meta name="description" content="Agencia de procesamiento de datos para pymes. Procesamos los datos de tu negocio y te entregamos reportes claros, P&L real y alertas a tiempo para que nunca más decidas a ciegas.">
+<meta name="theme-color" content="#111827">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='0' y='26' width='7' height='14' rx='1.5' fill='%23111827' opacity='.4'/%3E%3Crect x='10' y='20' width='7' height='20' rx='1.5' fill='%23111827' opacity='.6'/%3E%3Crect x='20' y='12' width='7' height='28' rx='1.5' fill='%23111827' opacity='.8'/%3E%3Crect x='30' y='4' width='7' height='36' rx='1.5' fill='%23111827'/%3E%3Cline x1='2' y1='36' x2='36' y2='5' stroke='%23F2B541' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pymetrics · ¿Sabés cuánto ganaste esta semana?">
+<meta property="og:description" content="Procesamos los datos de tu pyme y te entregamos reportes claros y alertas a tiempo, para que nunca más decidas a ciegas.">
+<meta property="og:url" content="https://pymetrics-landing.vercel.app">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#111827; --navy-2:#1F2937; --navy-3:#2A3645;
-  --yellow:#F2B541; --yellow-deep:#E0A02A; --yellow-soft:#FCEFCF;
-  --green:#16A34A; --amber:#D97706; --blue:#2563EB;
-  --gray-700:#374151; --gray-600:#4B5563; --gray-500:#6B7280; --gray-400:#9CA3AF;
-  --gray-300:#D1D5DB; --gray-200:#E5E7EB; --gray-100:#F3F4F6; --gray-50:#F9FAFB;
-  --white:#FFFFFF; --font:'Plus Jakarta Sans',system-ui,sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--white);color:var(--navy);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit}
-em{font-style:normal;color:var(--yellow-deep)}
+html,body{margin:0;padding:0}
+body{font-family:'Plus Jakarta Sans',-apple-system,system-ui,sans-serif;background:#F7F8FA;color:#111827;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+section[id],header[id]{scroll-margin-top:78px}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;
-  padding:14px 40px}
-.nav-logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.02em}
-.nav-logo .iso{display:flex;align-items:flex-end;gap:2px;height:20px}
-.nav-logo .iso i{width:4px;background:var(--navy);display:block;border-radius:1px}
-.nav-logo .iso i:nth-child(1){height:8px;opacity:.4}
-.nav-logo .iso i:nth-child(2){height:13px;opacity:.65}
-.nav-logo .iso i:nth-child(3){height:20px}
-.nav-links{display:flex;gap:26px}
-.nav-links a{font-size:14px;font-weight:500;color:var(--gray-600)}
-.nav-links a:hover{color:var(--navy)}
-.nav-cta{background:var(--yellow);color:var(--navy);font-weight:700;font-size:14px;padding:9px 18px;border-radius:100px}
-@media(max-width:760px){.nav-links{display:none}nav{padding:12px 20px}}
+@keyframes pm-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pm-marquee-rev{from{transform:translateX(-50%)}to{transform:translateX(0)}}
 
-/* GENERIC SECTION */
-section{padding:88px 40px}
-.s-inner{max-width:1100px;margin:0 auto}
-.s-tag{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow-deep);
-  margin-bottom:16px;display:flex;align-items:center;gap:12px}
-.s-tag::after{content:"";flex:1;height:2px;background:var(--navy);opacity:.1}
-.s-title{font-size:clamp(28px,4.4vw,46px);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:14px}
-.s-sub{color:var(--gray-600);font-size:17px;max-width:600px;margin-bottom:44px}
-.bg-gray{background:var(--gray-50)}
-@media(max-width:680px){section{padding:60px 20px}}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .pm-chev{transform:rotate(180deg)}
 
-/* BUTTONS */
-.btn-p{display:inline-block;background:var(--yellow);color:var(--navy);font-weight:700;font-size:15px;
-  padding:14px 26px;border-radius:100px;transition:.2s}
-.btn-p:hover{background:var(--yellow-deep)}
-.btn-s{display:inline-block;background:transparent;color:var(--navy);font-weight:700;font-size:15px;
-  padding:14px 26px;border-radius:100px;border:1.5px solid var(--gray-300);transition:.2s}
-.btn-s:hover{border-color:var(--navy)}
+/* ---- hover states (reemplazan el style-hover del prototipo) ---- */
+.nav-link{transition:color .15s}
+.nav-link:hover{color:#FFFFFF}
+.btn-amber{transition:background .18s}
+.btn-amber:hover{background:#E0A02A;color:#111827}
+.btn-outline{transition:background .18s}
+.btn-outline:hover{background:#EDF0F4}
+.btn-navy{transition:opacity .18s}
+.btn-navy:hover{opacity:.85;color:#FFFFFF}
 
-/* HERO */
-#hero{background:var(--navy);color:var(--white);position:relative;overflow:hidden;padding:96px 40px 80px}
-.hero-mark{position:absolute;right:48px;top:80px;display:flex;align-items:flex-end;gap:10px;opacity:.9}
-.hero-mark i{display:block;width:20px;background:var(--yellow)}
-.hero-mark i:nth-child(1){height:34px;opacity:.35}
-.hero-mark i:nth-child(2){height:60px;opacity:.55}
-.hero-mark i:nth-child(3){height:92px;opacity:.78}
-.hero-mark i:nth-child(4){height:128px}
-@media(max-width:880px){.hero-mark{display:none}}
-.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:600;color:var(--yellow);
-  background:rgba(242,181,65,.12);border:1px solid rgba(242,181,65,.3);padding:7px 16px;border-radius:100px;margin-bottom:28px}
-.hero-badge span{width:7px;height:7px;border-radius:50%;background:var(--yellow);display:inline-block}
-.hero-h1{font-size:clamp(38px,6.5vw,72px);font-weight:800;letter-spacing:-.04em;line-height:1.02}
-.hero-h1 em{color:var(--yellow)}
-.hero-desc{color:#9FB0C2;font-size:18px;max-width:560px;margin-top:22px;line-height:1.55}
-.hero-btns{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
-#hero .btn-s{color:var(--white);border-color:rgba(255,255,255,.25)}
-#hero .btn-s:hover{border-color:var(--white)}
-.hero-proof{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:56px;
-  border-top:1px solid var(--navy-3);padding-top:30px}
-.proof-num{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--yellow);line-height:1.1}
-.proof-label{font-size:13px;color:#9FB0C2;margin-top:6px}
-@media(max-width:680px){.hero-proof{grid-template-columns:1fr 1fr;gap:24px}}
+/* ---- responsive ---- */
+@media (max-width:960px){
+  .grid-4{grid-template-columns:repeat(2,1fr)!important}
+  .grid-tech{grid-template-columns:1fr!important;gap:36px!important}
+  .grid-bio{grid-template-columns:1fr!important;gap:40px!important}
+}
+@media (max-width:760px){
+  .nav-links{display:none!important}
+}
+@media (max-width:640px){
+  .grid-2{grid-template-columns:1fr!important}
+  .grid-4{grid-template-columns:1fr!important}
+  .hero-stats{display:grid!important;grid-template-columns:1fr 1fr;gap:22px 26px}
+  .hero-div{display:none!important}
+}
 
-/* PROBLEMA */
-.problema-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.prob-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:30px}
-.prob-card .idx{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--yellow-deep);margin-bottom:14px}
-.prob-card h3{font-size:19px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
-.prob-card p{color:var(--gray-600);font-size:15px}
-@media(max-width:680px){.problema-grid{grid-template-columns:1fr}}
-
-/* CÓMO FUNCIONA */
-.proceso-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.proceso-step{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:26px}
-.paso-when{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--yellow-deep);margin-bottom:18px}
-.paso-num{font-size:13px;font-weight:800;color:var(--navy);background:var(--yellow);width:34px;height:34px;
-  border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.paso-title{font-size:17px;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
-.paso-desc{font-size:14px;color:var(--gray-600)}
-@media(max-width:880px){.proceso-steps{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.proceso-steps{grid-template-columns:1fr}}
-
-/* SERVICIOS */
-.servicios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.srv-card{border-radius:16px;padding:28px;background:var(--white);border:1px solid var(--gray-200)}
-.srv-card.hi{background:var(--navy);color:var(--white);border-color:var(--navy)}
-.srv-card h3{font-size:18px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em}
-.srv-card p{font-size:14px;color:var(--gray-600);margin-bottom:16px}
-.srv-card.hi p{color:#C7D2DD}
-.srv-tags{display:flex;gap:7px;flex-wrap:wrap}
-.srv-tag{font-size:11px;font-weight:600;padding:5px 11px;border-radius:100px;background:var(--gray-100);color:var(--gray-700)}
-.srv-card.hi .srv-tag{background:var(--navy-3);color:var(--yellow)}
-.alertas-banner{background:var(--yellow);color:var(--navy);border-radius:16px;padding:30px 32px;margin-top:18px}
-.alertas-banner h3{font-size:20px;font-weight:800;margin-bottom:6px}
-.alertas-banner p{font-size:15px;color:var(--navy);opacity:.85;max-width:760px}
-@media(max-width:880px){.servicios-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.servicios-grid{grid-template-columns:1fr}}
-
-/* SISTEMA */
-.sistema-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
-.sistema-visual{background:var(--white);border:1px solid var(--gray-200);border-radius:18px;padding:22px}
-.sys-header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.sys-dots{display:flex;gap:6px}
-.sys-dot{width:10px;height:10px;border-radius:50%;background:var(--gray-300)}
-.sys-title-bar{font-size:12px;font-weight:600;color:var(--gray-500)}
-.sys-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
-.sys-tab{background:transparent;border:1px solid var(--gray-200);color:var(--gray-600);font-family:var(--font);
-  font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:8px;cursor:pointer;transition:.18s}
-.sys-tab.on{background:var(--navy);border-color:var(--navy);color:var(--white)}
-.sys-stats{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.sys-stat{flex:1;min-width:100px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:11px 14px}
-.sys-stat .l{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:4px}
-.sys-stat .v{font-size:17px;font-weight:800}
-.sys-view{min-height:200px}
-.sys-table{width:100%;border-collapse:collapse;font-size:14px}
-.sys-table td{padding:11px 6px;border-bottom:1px solid var(--gray-100)}
-.sys-table td:first-child{color:var(--gray-600);font-weight:500}
-.sys-table td:nth-child(2){text-align:right;font-weight:700;color:var(--navy);white-space:nowrap}
-.sys-table td.pct{text-align:right;font-weight:600;color:var(--gray-400);font-size:12px;width:62px}
-.sys-table tr.total td{border-top:2px solid var(--navy);border-bottom:none}
-.sys-table tr.total td:first-child{color:var(--navy);font-weight:800}
-.sys-table td.neg{color:var(--amber)}
-.sys-table td.pos{color:var(--green)}
-.cf-weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.cf-week{background:var(--gray-50);border:1px dashed var(--gray-300);border-radius:12px;padding:14px 12px}
-.cf-week .wk{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow-deep);margin-bottom:8px}
-.cf-week .wv{font-size:18px;font-weight:800;color:var(--green)}
-.cf-week .ws{font-size:10.5px;color:var(--gray-500);margin-top:6px;line-height:1.3}
-.cf-note{font-size:12px;color:var(--gray-500);margin-top:14px;line-height:1.4}
-@media(max-width:560px){.cf-weeks{grid-template-columns:1fr 1fr}}
-.sistema-content h3{font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1.12;margin-bottom:16px}
-.sistema-content p{color:var(--gray-600);font-size:15px;margin-bottom:14px}
-.sistema-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}
-.sys-pill{font-size:12px;font-weight:700;background:var(--navy);color:var(--white);padding:8px 15px;border-radius:100px}
-@media(max-width:880px){.sistema-grid{grid-template-columns:1fr;gap:28px}}
-
-/* CLIENTES — marquee de logos monocromo */
-.logos-wrap{display:flex;flex-direction:column;gap:28px;margin-top:8px}
-.logos-row{overflow:hidden;
-  -webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-          mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.logos-track{display:flex;align-items:center;gap:64px;width:max-content;will-change:transform}
-.logos-track.ltr{animation:marqLeft 36s linear infinite}
-.logos-track.rtl{animation:marqRight 36s linear infinite}
-.logos-row:hover .logos-track{animation-play-state:paused}
-@keyframes marqLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@keyframes marqRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
-/* logos reales (imágenes) en un solo tono */
-.logo-item{flex:0 0 auto;height:46px;display:flex;align-items:center;justify-content:center}
-.logo-item img{height:100%;width:auto;object-fit:contain;filter:brightness(0) opacity(.55);transition:.25s}
-.logos-row:hover .logo-item img{filter:brightness(0) opacity(.85)}
-/* placeholders provisionales (texto) — reemplazar por imágenes */
-.logo-ph{flex:0 0 auto;font-weight:800;font-size:21px;letter-spacing:-.02em;color:var(--navy);opacity:.4;white-space:nowrap}
-@media(max-width:680px){.logo-ph{font-size:17px}.logo-item{height:38px}}
-
-/* FUNDADOR */
-.founder-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:start}
-.founder-card{background:var(--navy);color:var(--white);border-radius:18px;padding:34px;text-align:center}
-.founder-avatar{width:96px;height:96px;border-radius:50%;background:var(--navy-2);margin:0 auto 18px;display:flex;align-items:center;justify-content:center}
-.founder-avatar i{display:block;width:8px;background:var(--yellow);border-radius:2px;margin:0 2px}
-.founder-name{font-size:22px;font-weight:800;letter-spacing:-.01em}
-.founder-role{font-size:13px;color:#9FB0C2;margin-top:4px;margin-bottom:22px}
-.founder-social{display:flex;flex-direction:column;gap:10px}
-.social-btn{font-size:14px;font-weight:600;padding:11px;border-radius:100px;background:var(--navy-3);color:var(--white)}
-.social-btn:hover{background:var(--yellow);color:var(--navy)}
-.founder-content h3{font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
-.founder-content p{color:var(--gray-600);font-size:15px;margin-bottom:14px}
-.founder-vals{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.fval{background:var(--white);border:1px solid var(--gray-200);border-radius:14px;padding:20px}
-.fval svg{display:block;margin-bottom:12px}
-.fval h4{font-size:15px;font-weight:800;margin-bottom:5px}
-.fval p{font-size:13px;color:var(--gray-600);margin:0}
-@media(max-width:880px){.founder-wrap{grid-template-columns:1fr}.founder-vals{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.founder-vals{grid-template-columns:1fr}}
-
-/* FAQ */
-.faq-list{display:flex;flex-direction:column;gap:12px;max-width:820px}
-.faq-item{background:var(--white);border:1px solid var(--gray-200);border-radius:14px;overflow:hidden}
-.faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;cursor:pointer;
-  font-size:16px;font-weight:700;letter-spacing:-.01em}
-.faq-ico{font-size:22px;font-weight:400;color:var(--yellow-deep);flex-shrink:0;transition:transform .2s}
-.faq-item.open .faq-ico{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;color:var(--gray-600);font-size:15px;padding:0 24px}
-.faq-item.open .faq-a{max-height:320px;padding:0 24px 22px}
-
-/* QUIZ */
-.quiz-container{max-width:680px;margin:0 auto}
-.quiz-box{background:var(--white);border:1px solid var(--gray-200);border-radius:20px;padding:36px}
-.quiz-prog{display:flex;gap:8px;margin-bottom:30px}
-.qbar{flex:1;height:5px;border-radius:100px;background:var(--gray-200)}
-.qbar.on{background:var(--yellow)}
-.quiz-step{display:none}
-.quiz-step.on{display:block}
-.q-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:10px}
-.q-title{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:22px}
-.q-opts{display:flex;flex-direction:column;gap:11px}
-.q-opt{border:1.5px solid var(--gray-200);border-radius:12px;padding:16px 18px;cursor:pointer;font-size:15px;font-weight:600;transition:.15s}
-.q-opt:hover{border-color:var(--navy)}
-.q-opt.sel{background:var(--navy);border-color:var(--navy);color:var(--white)}
-.q-nav{margin-top:24px;display:flex;justify-content:flex-end}
-.q-btn{background:var(--yellow);color:var(--navy);font-family:var(--font);font-weight:700;font-size:15px;
-  padding:13px 24px;border:none;border-radius:100px;cursor:pointer;transition:.2s}
-.q-btn:disabled{background:var(--gray-200);color:var(--gray-400);cursor:not-allowed}
-.cform{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.flabel{font-size:12px;font-weight:700;color:var(--gray-600);display:block;margin-bottom:6px}
-.finput{width:100%;border:1.5px solid var(--gray-200);border-radius:10px;padding:12px 14px;font-family:var(--font);font-size:15px;color:var(--navy)}
-.finput:focus{outline:none;border-color:var(--yellow-deep)}
-@media(max-width:560px){.cform{grid-template-columns:1fr}}
-
-/* CTA FINAL */
-#cta-final{background:var(--navy);color:var(--white);text-align:center}
-.cta-title{font-size:clamp(28px,4.6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1.1}
-.cta-title em{color:var(--yellow)}
-.cta-sub{color:#9FB0C2;font-size:17px;max-width:520px;margin:18px auto 32px}
-
-/* FOOTER */
-footer{background:var(--navy);color:var(--white);padding:44px 40px;display:flex;align-items:center;
-  justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--navy-3)}
-.f-logo{font-weight:800;font-size:18px}
-.f-links{display:flex;gap:22px}
-.f-links a{font-size:14px;color:#9FB0C2}
-.f-links a:hover{color:var(--white)}
-.f-copy{font-size:13px;color:#7E93A3}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
-.reveal.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .pm-marquee-row{animation:none!important}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo"><span class="iso"><i></i><i></i><i></i></span>Pymetrics</div>
-  <div class="nav-links">
-    <a href="#servicio">Cómo funciona</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#clientes">Clientes</a>
-    <a href="#fundador">Nosotros</a>
-  </div>
-  <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" target="_blank" class="nav-cta">Quiero empezar →</a>
-</nav>
+<div style="min-height:100vh;background:#F7F8FA">
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-mark"><i></i><i></i><i></i><i></i></div>
-  <div class="hero-inner">
-    <div class="hero-badge"><span></span> Agencia de procesamiento de datos · Retainer mensual</div>
-    <h1 class="hero-h1">Sabé siempre<br>a dónde va<br>el dinero de tu <em>negocio</em>.</h1>
-    <p class="hero-desc">Procesamos los datos de tu pyme mes a mes y te entregamos reportes claros, KPIs accionables y alertas en tiempo real para que nunca más tomes una decisión a ciegas.</p>
-    <div class="hero-btns">
-      <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" target="_blank" class="btn-p">Quiero claridad en mis números</a>
-      <a href="#servicio" class="btn-s">Ver cómo funciona</a>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-item"><div class="proof-num">Mes a mes</div><div class="proof-label">Procesamiento recurrente</div></div>
-      <div class="proof-item"><div class="proof-num">P&amp;L real</div><div class="proof-label">Estado de resultados claro</div></div>
-      <div class="proof-item"><div class="proof-num">Alertas</div><div class="proof-label">Semanales de costos</div></div>
-      <div class="proof-item"><div class="proof-num">100%</div><div class="proof-label">Datos privados y seguros</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- EL PROBLEMA -->
-<section id="problema">
-  <div class="s-inner reveal">
-    <div class="s-tag">01 — El problema</div>
-    <h2 class="s-title">La mayoría de los dueños de pymes<br>no saben <em>realmente</em> qué pasa con su dinero</h2>
-    <p class="s-sub">No es culpa tuya. Nadie te enseñó a leer los números de tu negocio. Pero tiene solución.</p>
-    <div class="problema-grid">
-      <div class="prob-card"><div class="idx">01</div><h3>Vendés pero no sabés si ganás</h3><p>Hay movimiento, hay facturación. Pero al final del mes no queda claro si el negocio es rentable de verdad.</p></div>
-      <div class="prob-card"><div class="idx">02</div><h3>Las cuentas no cierran</h3><p>Los números en papel dicen una cosa, la caja dice otra y el banco, otra distinta. Imposible saber cuál es la realidad.</p></div>
-      <div class="prob-card"><div class="idx">03</div><h3>Los costos suben sin que te des cuenta</h3><p>La mercadería subió, los insumos cambiaron. Pero nadie te avisó a tiempo y ya afectó tu margen.</p></div>
-      <div class="prob-card"><div class="idx">04</div><h3>Tomás decisiones sin datos</h3><p>¿Conviene abrir otro local? ¿Contratar más personal? Sin información confiable, todo es intuición.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- CÓMO FUNCIONA -->
-<section id="servicio" class="bg-gray">
-  <div class="s-inner reveal">
-    <div class="s-tag">02 — Cómo funciona</div>
-    <h2 class="s-title">Un servicio que<br><em>transforma</em> tus datos en decisiones</h2>
-    <p class="s-sub">Nos convertimos en tu equipo de datos. Vos manejás tu negocio; nosotros te decimos exactamente qué está pasando con los números, mes a mes.</p>
-    <div class="proceso-steps">
-      <div class="proceso-step"><div class="paso-when">Semana a semana</div><div class="paso-num">01</div><div class="paso-title">Cargás en la app</div><div class="paso-desc">Tus movimientos, ventas y compras van entrando en nuestra aplicación privada. Sin enviarnos archivos: todo en un solo lugar.</div></div>
-      <div class="proceso-step"><div class="paso-when">Semana a semana</div><div class="paso-num">02</div><div class="paso-title">Auditamos y alertamos</div><div class="paso-desc">Revisamos todo semanalmente. Si detectamos un aumento de costos o algo que no cierra, te avisamos al instante.</div></div>
-      <div class="proceso-step"><div class="paso-when">Al cierre del mes</div><div class="paso-num">03</div><div class="paso-title">Procesamos y entregamos</div><div class="paso-desc">Cerramos el mes con P&amp;L real, cashflow y KPIs. Los resultados completos aparecen directamente en tu app.</div></div>
-      <div class="proceso-step"><div class="paso-when">Al cierre del mes</div><div class="paso-num">04</div><div class="paso-title">Reunión de feedback</div><div class="paso-desc">Revisamos juntos los números, respondemos tus dudas y te ayudamos a decidir mejor para el mes que viene.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section id="servicios">
-  <div class="s-inner reveal">
-    <div class="s-tag">03 — Qué incluye</div>
-    <h2 class="s-title">Todo lo que necesitás<br>para <em>controlar</em> tu negocio</h2>
-    <p class="s-sub">Un paquete mensual completo. Sin sorpresas, sin costos extra.</p>
-    <div class="servicios-grid">
-      <div class="srv-card hi"><h3>Conciliación bancaria y de caja</h3><p>Cruzamos todos tus movimientos: banco, efectivo y tarjetas. La caja y el banco siempre cuadran. Cero diferencias sin explicación.</p><div class="srv-tags"><span class="srv-tag">Banco</span><span class="srv-tag">Efectivo</span><span class="srv-tag">Tarjetas</span></div></div>
-      <div class="srv-card hi"><h3>Estado de resultados (P&amp;L)</h3><p>Tu P&amp;L mensual real. Ingresos, costos, gastos y rentabilidad neta. Sabés exactamente si ganaste o perdiste, y cuánto.</p><div class="srv-tags"><span class="srv-tag">Mensual</span><span class="srv-tag">Comparativo</span><span class="srv-tag">Legible</span></div></div>
-      <div class="srv-card hi"><h3>Cashflow real + proyectado</h3><p>Todos los movimientos del mes más una proyección a 1-2 meses para anticiparte a los problemas de liquidez.</p><div class="srv-tags"><span class="srv-tag">Real</span><span class="srv-tag">Proyección 2 meses</span></div></div>
-      <div class="srv-card"><h3>Auditoría de caja</h3><p>Verificamos que los movimientos de caja sean correctos y detectamos inconsistencias antes de que se conviertan en problemas.</p><div class="srv-tags"><span class="srv-tag">Auditoría</span><span class="srv-tag">Control interno</span></div></div>
-      <div class="srv-card"><h3>Costeo de recetas</h3><p>Calculamos el costo real de cada producto o plato. Sabés cuánto te cuesta producir lo que vendés y cuál es tu margen.</p><div class="srv-tags"><span class="srv-tag">Food cost</span><span class="srv-tag">Margen por plato</span></div></div>
-      <div class="srv-card"><h3>Implementación de sistemas</h3><p>Instalamos y configuramos tu sistema de facturación y punto de venta para que los datos fluyan correctamente desde el origen.</p><div class="srv-tags"><span class="srv-tag">POS</span><span class="srv-tag">Facturación</span><span class="srv-tag">Setup</span></div></div>
-      <div class="srv-card hi" style="grid-column:1/-1"><h3>Automatización de procesos con IA</h3><p>Analizamos cómo trabaja tu negocio, ordenamos sus procesos y automatizamos las tareas repetitivas con inteligencia artificial. Menos trabajo manual, menos errores y más tiempo para lo que importa.</p><div class="srv-tags"><span class="srv-tag">Análisis de procesos</span><span class="srv-tag">Organización de procesos</span><span class="srv-tag">Automatización con IA</span></div></div>
-    </div>
-    <div class="alertas-banner">
-      <h3>Alertas semanales incluidas</h3>
-      <p>Cada semana te avisamos si hubo aumentos de costos de mercadería, movimientos inusuales o cualquier señal de alerta en tus números. Te enterás antes de que sea un problema.</p>
-    </div>
-  </div>
-</section>
-
-<!-- SISTEMA -->
-<section id="sistema" class="bg-gray">
-  <div class="s-inner reveal">
-    <div class="s-tag">04 — Tecnología</div>
-    <div class="sistema-grid">
-      <div class="sistema-visual">
-        <div class="sys-header">
-          <div class="sys-dots"><div class="sys-dot"></div><div class="sys-dot"></div><div class="sys-dot"></div></div>
-          <div class="sys-title-bar">Pymetrics App · Dashboard</div>
+  <!-- NAV — barra navy -->
+  <nav style="background:#111827;position:sticky;top:0;z-index:50">
+    <div style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:16px clamp(20px,4vw,56px)">
+      <a href="#top" aria-label="Pymetrics — inicio"><svg width="150" height="30" viewBox="0 0 200 40" fill="none" style="display:block"><rect x="0" y="26" width="7" height="14" rx="1.5" fill="#FFFFFF" opacity=".35"></rect><rect x="10" y="20" width="7" height="20" rx="1.5" fill="#FFFFFF" opacity=".5"></rect><rect x="20" y="12" width="7" height="28" rx="1.5" fill="#FFFFFF" opacity=".7"></rect><rect x="30" y="4" width="7" height="36" rx="1.5" fill="#FFFFFF" opacity=".92"></rect><line x1="2" y1="36" x2="36" y2="5" stroke="#F2B541" stroke-width="2.5" stroke-linecap="round"></line><text x="48" y="28" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="19" fill="#FFFFFF" letter-spacing="0.06em">PYMETRICS</text></svg></a>
+      <div style="display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600;color:#B6BFCC">
+        <div class="nav-links" style="display:flex;align-items:center;gap:26px">
+          <a href="#como-funciona" class="nav-link">Cómo funciona</a>
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#clientes" class="nav-link">Clientes</a>
+          <a href="#nosotros" class="nav-link">Nosotros</a>
         </div>
-        <div class="sys-tabs">
-          <button class="sys-tab on" id="tab-pl" onclick="switchChart('pl')">P&amp;L</button>
-          <button class="sys-tab" id="tab-cf" onclick="switchChart('cashflow')">Cashflow</button>
-          <button class="sys-tab" id="tab-pr" onclick="switchChart('proyectado')">CF proyectado</button>
-          <button class="sys-tab" id="tab-ia" onclick="switchChart('ia')">Carga IA</button>
-        </div>
-        <!-- P&L (tabla) -->
-        <div class="sys-view" id="view-pl">
-          <table class="sys-table">
-            <tr><td>Ventas</td><td>$2.840.000</td><td class="pct">100%</td></tr>
-            <tr><td>Costo de mercadería</td><td class="neg">−$1.600.000</td><td class="pct">56,3%</td></tr>
-            <tr class="total"><td>Utilidad bruta</td><td class="pos">$1.240.000</td><td class="pct">43,7%</td></tr>
-            <tr><td>Gastos operativos</td><td class="neg">−$680.000</td><td class="pct">23,9%</td></tr>
-            <tr class="total"><td>Resultado del mes</td><td class="pos">$560.000</td><td class="pct">19,7%</td></tr>
-          </table>
-        </div>
-        <!-- Cashflow (tabla) -->
-        <div class="sys-view" id="view-cf" hidden>
-          <table class="sys-table">
-            <tr><td>Ingresos del mes</td><td class="pos">$2.910.000</td></tr>
-            <tr><td>Egresos del mes</td><td class="neg">−$1.860.000</td></tr>
-            <tr class="total"><td>Saldo del mes</td><td class="pos">$1.050.000</td></tr>
-            <tr><td>Saldo inicial</td><td>$740.000</td></tr>
-            <tr class="total"><td>Saldo final</td><td class="pos">$1.790.000</td></tr>
-          </table>
-        </div>
-        <!-- CF proyectado (cuadritos de 4 semanas) -->
-        <div class="sys-view" id="view-pr" hidden>
-          <div class="cf-weeks">
-            <div class="cf-week"><div class="wk">Sem 1 · proy</div><div class="wv">+$360k</div><div class="ws">Ing $1.180k · Egr $820k</div></div>
-            <div class="cf-week"><div class="wk">Sem 2 · proy</div><div class="wv">+$330k</div><div class="ws">Ing $1.240k · Egr $910k</div></div>
-            <div class="cf-week"><div class="wk">Sem 3 · proy</div><div class="wv">+$340k</div><div class="ws">Ing $1.210k · Egr $870k</div></div>
-            <div class="cf-week"><div class="wk">Sem 4 · proy</div><div class="wv">+$540k</div><div class="ws">Ing $1.300k · Egr $760k</div></div>
-          </div>
-          <div class="cf-note">Flujo neto proyectado · 4 semanas: <strong style="color:var(--navy)">+$1.570k</strong>. Proyección sobre el promedio de semanas históricas.</div>
-        </div>
-        <!-- Carga IA (gráfico comparativo) -->
-        <div class="sys-view" id="view-ia" hidden>
-          <div style="position:relative;height:200px"><canvas id="sysChart"></canvas></div>
-          <div class="sys-stats" style="margin-top:14px">
-            <div class="sys-stat"><div class="l">Tiempo de carga</div><div class="v" style="color:var(--green)">−88%</div></div>
-            <div class="sys-stat"><div class="l">Errores</div><div class="v" style="color:var(--green)">−92%</div></div>
-            <div class="sys-stat"><div class="l">Carga de facturas</div><div class="v" style="color:var(--navy)">Automática</div></div>
-          </div>
-        </div>
+        <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" class="btn-amber" style="display:inline-flex;align-items:center;height:42px;padding:0 20px;background:#F2B541;color:#111827;border-radius:10px;font-weight:700;cursor:pointer">Quiero empezar →</a>
       </div>
-      <div class="sistema-content">
-        <h3>Un sistema privado<br>hecho para tu <em>pyme</em></h3>
-        <p>No usamos planillas de Excel genéricas. Utilizamos una aplicación privada e interna donde toda la información de tu negocio vive ordenada, segura y accesible.</p>
-        <p>Sin conexión con sistemas gubernamentales. Sin compartir datos con terceros. Tu información es solo tuya.</p>
-        <div class="sistema-pills">
-          <span class="sys-pill">100% privado</span>
-          <span class="sys-pill">App propia</span>
-          <span class="sys-pill">Carga con IA</span>
-          <span class="sys-pill">Auditoría con IA</span>
-          <span class="sys-pill">Tiempo real</span>
-          <span class="sys-pill">LATAM</span>
+    </div>
+  </nav>
+
+  <!-- HERO — problema primero -->
+  <header id="top" style="max-width:1200px;margin:0 auto;padding:70px clamp(20px,4vw,56px) 80px">
+    <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:22px">Agencia de procesamiento de datos · Retainer mensual</div>
+    <h1 style="margin:0;font-weight:800;font-size:clamp(42px,6vw,76px);line-height:1.05;letter-spacing:-.03em;text-wrap:balance;max-width:16ch">¿Sabés cuánto ganaste <span style="position:relative;white-space:nowrap">esta semana<span style="position:absolute;left:0;right:0;bottom:6px;height:12px;background:#F2B541;opacity:.45;z-index:-1;border-radius:2px"></span></span>?</h1>
+    <p style="margin:26px 0 0;font-size:19px;line-height:1.6;color:#566072;max-width:54ch;text-wrap:pretty">La mayoría de los dueños no lo sabe. Lo intuye. Nosotros procesamos los datos de tu pyme y te entregamos reportes claros y alertas a tiempo, para que nunca más decidas a ciegas.</p>
+    <div style="display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap">
+      <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" class="btn-amber" style="display:inline-flex;align-items:center;gap:9px;height:54px;padding:0 28px;background:#F2B541;color:#111827;border-radius:12px;font-size:16px;font-weight:700">Quiero claridad en mis números<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a href="#como-funciona" class="btn-outline" style="display:inline-flex;align-items:center;height:54px;padding:0 24px;border:1px solid #D6DAE1;border-radius:12px;font-size:15px;font-weight:600;color:#111827;cursor:pointer">Ver cómo funciona</a>
+    </div>
+    <div class="hero-stats" style="display:flex;gap:34px;margin-top:52px;flex-wrap:wrap">
+      <div><div style="font-size:17px;font-weight:800">Mes a mes</div><div style="font-size:13px;color:#8A93A3;font-weight:500">Procesamiento recurrente</div></div>
+      <div class="hero-div" style="width:1px;background:#D6DAE1"></div>
+      <div><div style="font-size:17px;font-weight:800">P&amp;L real</div><div style="font-size:13px;color:#8A93A3;font-weight:500">Estado de resultados claro</div></div>
+      <div class="hero-div" style="width:1px;background:#D6DAE1"></div>
+      <div><div style="font-size:17px;font-weight:800">Alertas</div><div style="font-size:13px;color:#8A93A3;font-weight:500">Semanales de costos</div></div>
+      <div class="hero-div" style="width:1px;background:#D6DAE1"></div>
+      <div><div style="font-size:17px;font-weight:800">100%</div><div style="font-size:13px;color:#8A93A3;font-weight:500">Datos privados y seguros</div></div>
+    </div>
+  </header>
+
+  <!-- 01 · ¿TE SUENA? -->
+  <section style="background:#111827;padding:88px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8B95A7;margin-bottom:16px">01 — ¿Te suena?</div>
+      <h2 style="margin:0 0 14px;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em;color:#FFFFFF;max-width:26ch;text-wrap:balance">Si marcás dos o más, tu negocio corre a ciegas.</h2>
+      <p style="margin:0 0 44px;font-size:16px;line-height:1.6;color:#8B95A7;max-width:54ch;text-wrap:pretty">No es culpa tuya. Nadie te enseñó a leer los números de tu negocio. Pero tiene solución.</p>
+      <div class="grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px">
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">01</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Vendés pero no sabés si ganás</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«Cierro el mes y recién a los 40 días sé si gané o perdí.»</p></div>
+        </div>
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">02</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Las cuentas no cierran</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«El papel dice una cosa, mi caja dice otra y el banco, otra distinta.»</p></div>
+        </div>
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">03</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Los costos suben sin avisar</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«La mercadería subió y me enteré tres semanas después, vendiendo a pérdida.»</p></div>
+        </div>
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">04</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Movimientos que no podés probar</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«Sospecho que hay algo raro en la caja, pero no tengo cómo verlo.»</p></div>
+        </div>
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">05</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">Decisiones sin datos</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«¿Abro otro local? ¿Contrato? Mi contador me habla del trimestre pasado; yo necesito saber qué hago el lunes.»</p></div>
+        </div>
+        <div style="background:#1B2434;border-radius:14px;padding:26px 28px;display:flex;gap:16px;align-items:flex-start">
+          <span style="font-size:13px;font-weight:800;color:#F2B541;margin-top:3px;font-variant-numeric:tabular-nums">06</span>
+          <div><div style="font-size:16px;font-weight:700;color:#FFFFFF;margin-bottom:4px">No hay tiempo para los números</div><p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">«Sé que tendría que mirarlos. No tengo tiempo ni ganas: yo quiero atender mi negocio.»</p></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CLIENTES -->
-<section id="clientes">
-  <div class="s-inner reveal">
-    <div class="s-tag">05 — Experiencia en el área</div>
-    <h2 class="s-title">Negocios con los que<br>ya <em>trabajé</em></h2>
-    <p class="s-sub">Marcas gastronómicas y comercios donde trabajé de cerca en su administración, sus compras, sus números y la implementación de sus sistemas.</p>
-
-    <!-- Para logos reales (PNG transparente / SVG): <div class="logo-item"><img src="logo.png" alt="Nombre"></div> -->
-    <div class="logos-wrap">
-      <!-- Fila 1: cruza hacia la izquierda -->
-      <div class="logos-row">
-        <div class="logos-track ltr">
-          <span class="logo-ph">Casa Kaba</span>
-          <span class="logo-ph">Nob3l Bar</span>
-          <span class="logo-ph">Black Soul</span>
-          <span class="logo-ph">Memphis Bowling</span>
-          <span class="logo-ph">Alma y Fuego</span>
-          <span class="logo-ph">Fusion Chef</span>
-          <span class="logo-ph">Gökotta Café</span>
-          <span class="logo-ph">G.O.A.T</span>
-          <span class="logo-ph">Dakota Resto Bar</span>
-          <span class="logo-ph">La Pancha y el Café</span>
-          <span class="logo-ph">Confitería Vicente López</span>
-          <span class="logo-ph">Michelangelo</span>
-          <span class="logo-ph">Dante Bar</span>
-          <span class="logo-ph">Grill y Wine</span>
-          <!-- duplicado para loop continuo -->
-          <span class="logo-ph">Casa Kaba</span>
-          <span class="logo-ph">Nob3l Bar</span>
-          <span class="logo-ph">Black Soul</span>
-          <span class="logo-ph">Memphis Bowling</span>
-          <span class="logo-ph">Alma y Fuego</span>
-          <span class="logo-ph">Fusion Chef</span>
-          <span class="logo-ph">Gökotta Café</span>
-          <span class="logo-ph">G.O.A.T</span>
-          <span class="logo-ph">Dakota Resto Bar</span>
-          <span class="logo-ph">La Pancha y el Café</span>
-          <span class="logo-ph">Confitería Vicente López</span>
-          <span class="logo-ph">Michelangelo</span>
-          <span class="logo-ph">Dante Bar</span>
-          <span class="logo-ph">Grill y Wine</span>
-        </div>
+  <!-- 02 · CÓMO FUNCIONA -->
+  <section id="como-funciona" style="max-width:1200px;margin:0 auto;padding:88px clamp(20px,4vw,56px)">
+    <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">02 — Cómo funciona</div>
+    <h2 style="margin:0 0 14px;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em;max-width:26ch;text-wrap:balance">Todo eso deja de ser tu trabajo.</h2>
+    <p style="margin:0 0 46px;font-size:17px;line-height:1.6;color:#566072;max-width:58ch;text-wrap:pretty">Nos convertimos en tu equipo de datos. Vos manejás tu negocio; nosotros procesamos, auditamos y te decimos exactamente qué está pasando con los números.</p>
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:24px">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:12px">Semana a semana</div>
+        <span style="width:40px;height:40px;border-radius:10px;background:#F2B541;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.95"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+        <div style="font-size:16px;font-weight:700;margin-bottom:5px">01 · Cargás en la app</div>
+        <p style="margin:0;font-size:14px;line-height:1.55;color:#566072;text-wrap:pretty">Movimientos, ventas y compras entran en tu aplicación privada. Sin enviar archivos: todo en un solo lugar.</p>
       </div>
-      <!-- Fila 2: cruza hacia la derecha -->
-      <div class="logos-row">
-        <div class="logos-track rtl">
-          <span class="logo-ph">Átiko</span>
-          <span class="logo-ph">Che Perú</span>
-          <span class="logo-ph">Amelia Café</span>
-          <span class="logo-ph">Forest Dan</span>
-          <span class="logo-ph">Austria Restaurant</span>
-          <span class="logo-ph">Emily Daniels</span>
-          <span class="logo-ph">Basta d’ Humo</span>
-          <span class="logo-ph">Cofi Jaus</span>
-          <span class="logo-ph">Kaizen</span>
-          <span class="logo-ph">Glück</span>
-          <span class="logo-ph">Aljibe Tango</span>
-          <span class="logo-ph">Gala Tango</span>
-          <span class="logo-ph">La Ventana Tango</span>
-          <!-- duplicado para loop continuo -->
-          <span class="logo-ph">Átiko</span>
-          <span class="logo-ph">Che Perú</span>
-          <span class="logo-ph">Amelia Café</span>
-          <span class="logo-ph">Forest Dan</span>
-          <span class="logo-ph">Austria Restaurant</span>
-          <span class="logo-ph">Emily Daniels</span>
-          <span class="logo-ph">Basta d’ Humo</span>
-          <span class="logo-ph">Cofi Jaus</span>
-          <span class="logo-ph">Kaizen</span>
-          <span class="logo-ph">Glück</span>
-          <span class="logo-ph">Aljibe Tango</span>
-          <span class="logo-ph">Gala Tango</span>
-          <span class="logo-ph">La Ventana Tango</span>
+      <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:24px">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:12px">Semana a semana</div>
+        <span style="width:40px;height:40px;border-radius:10px;background:#F2B541;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.95"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+        <div style="font-size:16px;font-weight:700;margin-bottom:5px">02 · Auditamos y alertamos</div>
+        <p style="margin:0;font-size:14px;line-height:1.55;color:#566072;text-wrap:pretty">Revisamos todo semanalmente. Costos que suben, cajas que no cierran, movimientos raros: te avisamos al instante.</p>
+      </div>
+      <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:24px">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:12px">Al cierre del mes</div>
+        <span style="width:40px;height:40px;border-radius:10px;background:#F2B541;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.95"><path d="M3 3v18h18M8 14v3M13 9v8M18 5v12"/></svg></span>
+        <div style="font-size:16px;font-weight:700;margin-bottom:5px">03 · Procesamos y entregamos</div>
+        <p style="margin:0;font-size:14px;line-height:1.55;color:#566072;text-wrap:pretty">Cerramos el mes con P&amp;L real, cashflow y KPIs. Los resultados aparecen directamente en tu app.</p>
+      </div>
+      <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:24px">
+        <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:12px">Al cierre del mes</div>
+        <span style="width:40px;height:40px;border-radius:10px;background:#F2B541;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="1.95"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div style="font-size:16px;font-weight:700;margin-bottom:5px">04 · Reunión de feedback</div>
+        <p style="margin:0;font-size:14px;line-height:1.55;color:#566072;text-wrap:pretty">Revisamos juntos los números, respondemos tus dudas y decidís mejor para el mes que viene.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · QUÉ INCLUYE -->
+  <section id="servicios" style="background:#EDF0F4;padding:88px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">03 — Qué incluye</div>
+      <h2 style="margin:0 0 14px;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em;max-width:30ch;text-wrap:balance">Cada entregable responde una pregunta que hoy te desvela.</h2>
+      <p style="margin:0 0 46px;font-size:16px;line-height:1.6;color:#566072;max-width:50ch;text-wrap:pretty">Un paquete mensual completo. Sin sorpresas, sin costos extra.</p>
+      <div class="grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px">
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿La caja y el banco cuadran?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Conciliación bancaria y de caja</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Cruzamos banco, efectivo y tarjetas todos los días. Cero diferencias sin explicación — y vos no volvés a abrir un extracto.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Estoy ganando plata?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Estado de resultados (P&amp;L)</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Ingresos, costos, gastos y rentabilidad neta, mensual y comparativo. Sabés exactamente si ganaste o perdiste, y cuánto.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Me alcanza para pagar lo que viene?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Cashflow real + proyectado</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Todos los movimientos del mes más una proyección a 1-2 meses para anticiparte a los problemas de liquidez.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Hay movimientos raros?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Auditoría de caja</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Verificamos que cada movimiento sea correcto y detectamos inconsistencias antes de que se conviertan en problemas.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Cuánto me cuesta lo que vendo?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Costeo de recetas</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">El costo real de cada producto o plato, y el margen de cada uno. Food cost sin misterios.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Mis datos nacen bien?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Implementación de sistemas</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Instalamos y configuramos tu facturación y punto de venta para que los datos fluyan correctos desde el origen.</p>
+        </div>
+        <div style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:26px 28px">
+          <div style="font-size:13px;font-weight:700;color:#E0A02A;margin-bottom:8px">¿Cuánto trabajo manual me puedo sacar?</div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:6px">Automatización de procesos con IA</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#566072;text-wrap:pretty">Ordenamos tus procesos y automatizamos las tareas repetitivas con IA. Menos errores, más tiempo para tu negocio.</p>
+        </div>
+        <div style="background:#111827;border-radius:14px;padding:26px 28px">
+          <div style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#F2B541;margin-bottom:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>¿Me entero a tiempo?</div>
+          <div style="font-size:17px;font-weight:700;color:#FFFFFF;margin-bottom:6px">Alertas semanales incluidas</div>
+          <p style="margin:0;font-size:15px;line-height:1.55;color:#8B95A7;text-wrap:pretty">Aumentos de mercadería, movimientos inusuales o cualquier señal en tus números: te enterás antes de que sea un problema.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FUNDADOR -->
-<section id="fundador" class="bg-gray">
-  <div class="s-inner reveal">
-    <div class="s-tag">06 — Quién está detrás</div>
-    <div class="founder-wrap">
-      <div class="founder-card">
-        <div class="founder-avatar">
-          <i style="height:18px;opacity:.4"></i><i style="height:30px;opacity:.65"></i><i style="height:44px"></i>
-        </div>
-        <div class="founder-name">Lenrik Guerrero</div>
-        <div class="founder-role">Fundador · Pymetrics</div>
-        <div class="founder-social">
-          <a href="https://ig.me/m/lenrikguerrero" target="_blank" class="social-btn">@lenrikguerrero</a>
-          <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" target="_blank" class="social-btn">WhatsApp directo</a>
+  <!-- 04 · TECNOLOGÍA -->
+  <section style="max-width:1200px;margin:0 auto;padding:88px clamp(20px,4vw,56px)">
+    <div class="grid-tech" style="display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center">
+      <div>
+        <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">04 — Tecnología</div>
+        <h2 style="margin:0 0 16px;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em;text-wrap:balance">Un sistema privado hecho para tu pyme.</h2>
+        <p style="margin:0 0 22px;font-size:16px;line-height:1.6;color:#566072;text-wrap:pretty">No usamos planillas de Excel genéricas. Toda la información de tu negocio vive ordenada, segura y accesible en una aplicación privada e interna.</p>
+        <p style="margin:0 0 26px;font-size:16px;line-height:1.6;color:#566072;text-wrap:pretty">Sin conexión con sistemas gubernamentales. Sin compartir datos con terceros. Tu información es solo tuya.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">100% privado</span>
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">App propia</span>
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">Carga con IA</span>
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">Auditoría con IA</span>
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">Tiempo real</span>
+          <span style="padding:6px 13px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:12.5px;font-weight:700;color:#111827">LATAM</span>
         </div>
       </div>
-      <div class="founder-content">
-        <h3>El problema de los dueños de pymes no es el negocio.<br>Es la falta de <em>claridad</em>.</h3>
-        <p>Vi de cerca cómo dueños de negocios trabajaban 12 horas al día sin saber si realmente estaban ganando dinero. Tenían clientes, tenían movimiento, pero los números nunca cerraban del todo.</p>
-        <p>Fundé Pymetrics para cambiar eso. Construimos una agencia que procesa los datos de tu pyme mes a mes y te entrega información confiable, reportes que podés leer y alertas que te permiten reaccionar a tiempo.</p>
-        <p>No somos contadores ni auditores. Somos tu equipo de datos, trabajando para que vos puedas tomar las mejores decisiones siempre.</p>
-        <div class="founder-vals">
-          <div class="fval">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#111827" stroke-width="2.2"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="2.8" fill="#111827" stroke="none"/></svg>
-            <h4>Claridad</h4><p>Información que cualquier dueño entiende, sin jerga técnica.</p>
-          </div>
-          <div class="fval">
-            <svg width="32" height="32" viewBox="0 0 32 32"><rect x="4" y="18" width="5" height="9" rx="1.3" fill="#111827"/><rect x="13" y="12" width="5" height="15" rx="1.3" fill="#111827"/><rect x="22" y="6" width="5" height="21" rx="1.3" fill="#111827"/></svg>
-            <h4>Precisión</h4><p>Datos auditados y conciliados. Lo que dice el número, es.</p>
-          </div>
-          <div class="fval">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#111827" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M26 12a11 11 0 1 0 1.5 8"/><path d="M26 5v7h-7"/></svg>
-            <h4>Recurrencia</h4><p>Todos los meses, sin falta. Tu negocio no para, nosotros tampoco.</p>
-          </div>
-          <div class="fval">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#111827" stroke-width="2.2" stroke-linejoin="round"><rect x="7" y="14" width="18" height="13" rx="2.5"/><path d="M11 14v-3a5 5 0 0 1 10 0v3"/></svg>
-            <h4>Privacidad</h4><p>Tus datos son solo tuyos. Sistema privado, sin terceros.</p>
-          </div>
+      <!-- mini dashboard mock -->
+      <div style="background:#111827;border-radius:18px;padding:20px;box-shadow:0 24px 60px rgba(16,24,40,.25)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <span style="font-size:12px;font-weight:700;color:#FFFFFF">Pymetrics App · Dashboard</span>
+          <span style="display:flex;gap:6px"><span style="padding:3px 9px;border-radius:9999px;background:#F2B541;color:#111827;font-size:10.5px;font-weight:800">P&amp;L</span><span style="padding:3px 9px;border-radius:9999px;background:#1B2434;color:#8B95A7;font-size:10.5px;font-weight:700">Cashflow</span><span style="padding:3px 9px;border-radius:9999px;background:#1B2434;color:#8B95A7;font-size:10.5px;font-weight:700">Carga IA</span></span>
+        </div>
+        <div style="background:#FFFFFF;border-radius:12px;padding:16px">
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="color:#566072;font-weight:500">Ventas</span><span style="font-weight:700;font-variant-numeric:tabular-nums">$2.840.000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="color:#566072;font-weight:500">Costo de mercadería</span><span style="font-weight:700;color:#DC2626;font-variant-numeric:tabular-nums">−$1.600.000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="font-weight:700">Utilidad bruta</span><span style="font-weight:800;font-variant-numeric:tabular-nums">$1.240.000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="color:#566072;font-weight:500">Gastos operativos</span><span style="font-weight:700;color:#DC2626;font-variant-numeric:tabular-nums">−$680.000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0 2px;font-size:14px"><span style="font-weight:800">Resultado del mes</span><span style="font-weight:800;color:#16A34A;font-variant-numeric:tabular-nums">$560.000</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Tiempo de carga</div><div style="font-size:18px;font-weight:800;color:#F2B541;font-variant-numeric:tabular-nums">−88%</div></div>
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Errores</div><div style="font-size:18px;font-weight:800;color:#F2B541;font-variant-numeric:tabular-nums">−92%</div></div>
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Facturas</div><div style="font-size:14px;font-weight:800;color:#F2B541;margin-top:3px">Automática</div></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FAQ -->
-<section id="faq">
-  <div class="s-inner reveal">
-    <div class="s-tag">07 — Preguntas frecuentes</div>
-    <h2 class="s-title">Lo que todos<br><em>preguntan</em></h2>
-    <div class="faq-list">
-      <div class="faq-item"><div class="faq-q">¿Qué diferencia hay con un contador? <span class="faq-ico">+</span></div><div class="faq-a">El contador mira hacia atrás: registra lo que ya pasó y se lo declara al fisco. Nosotros miramos el presente y el futuro: te decimos exactamente dónde está tu dinero hoy y hacia dónde va mañana. No somos excluyentes — muchos clientes tienen contador y también trabajan con Pymetrics, porque son dos herramientas con propósitos distintos.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Necesito tener mis datos ordenados para empezar? <span class="faq-ico">+</span></div><div class="faq-a">No. Trabajamos con lo que tenés, en el formato que lo tenés. Parte de nuestro trabajo inicial es organizar, limpiar y estructurar tu información. Empezamos desde donde estás vos.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Cómo funciona el modelo mensual? <span class="faq-ico">+</span></div><div class="faq-a">Vos cargás la información de tu negocio en nuestra aplicación privada. Nosotros la auditamos semana a semana y generamos alertas si detectamos algo que requiere atención. Al cierre de cada mes procesamos todo, subimos los resultados completos a la misma app y coordinamos una reunión de feedback para revisar juntos los números y tomar decisiones.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Para qué tipo de negocio es Pymetrics? <span class="faq-ico">+</span></div><div class="faq-a">Para cualquier pyme que quiera controlar sus números. Tenemos mucha experiencia en gastronomía, pero trabajamos con comercios, servicios y negocios de distintos rubros en Argentina, Venezuela y LATAM.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Los datos de mi empresa están seguros? <span class="faq-ico">+</span></div><div class="faq-a">Sí. Usamos un sistema privado desarrollado internamente, sin conexión con organismos gubernamentales ni terceros. Tu información es estrictamente confidencial y solo tu equipo y Pymetrics tienen acceso.</div></div>
-      <div class="faq-item"><div class="faq-q">¿Trabajan online? <span class="faq-ico">+</span></div><div class="faq-a">Sí, trabajamos 100% online con clientes en toda LATAM. También atendemos de forma presencial según disponibilidad en Argentina (Buenos Aires) y Venezuela (Caracas y Estado Zulia).</div></div>
+  <!-- 05 · CLIENTES -->
+  <section id="clientes" style="background:#EDF0F4;padding:72px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">05 — Experiencia en el área</div>
+      <h2 style="margin:0 0 14px;font-weight:800;font-size:clamp(26px,3vw,38px);line-height:1.12;letter-spacing:-.02em;max-width:30ch;text-wrap:balance">Negocios con los que ya <em style="font-style:italic;color:#E0A02A">trabajé</em>.</h2>
+      <p style="margin:0 0 40px;font-size:16px;line-height:1.6;color:#566072;max-width:56ch;text-wrap:pretty">Marcas gastronómicas y comercios donde trabajé de cerca en su administración, sus compras, sus números y la implementación de sus sistemas.</p>
     </div>
-  </div>
-</section>
+    <div style="overflow:hidden;display:flex;flex-direction:column;gap:14px;margin-top:4px">
+      <div class="pm-marquee-row" style="display:flex;gap:12px;width:max-content;animation:pm-marquee 42s linear infinite">
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Casa Kaba</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Nob3l Bar</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Black Soul</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Memphis Bowling</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Alma y Fuego</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Fusion Chef</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Gökotta Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">G.O.A.T</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Dakota Resto Bar</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">La Pancha y el Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Confitería Vicente López</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Michelangelo</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Dante Bar Grill y Wine</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Casa Kaba</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Nob3l Bar</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Black Soul</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Memphis Bowling</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Alma y Fuego</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Fusion Chef</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Gökotta Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">G.O.A.T</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Dakota Resto Bar</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">La Pancha y el Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Confitería Vicente López</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Michelangelo</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Dante Bar Grill y Wine</span>
+      </div>
+      <div class="pm-marquee-row" style="display:flex;gap:12px;width:max-content;animation:pm-marquee-rev 48s linear infinite">
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Átiko</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Che Perú</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Amelia Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Forest Dan</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Austria Restaurant</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Emily Daniels</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Basta d’ Humo</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Cofi Jaus</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Kaizen</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Glück</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Aljibe Tango</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">Gala Tango</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap">La Ventana Tango</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Átiko</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Che Perú</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Amelia Café</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Forest Dan</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Austria Restaurant</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Emily Daniels</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Basta d’ Humo</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Cofi Jaus</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Kaizen</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Glück</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Aljibe Tango</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">Gala Tango</span>
+        <span style="flex:none;padding:9px 18px;border-radius:9999px;background:#FFFFFF;box-shadow:0 1px 2px rgba(16,24,40,.06);font-size:14px;font-weight:600;color:#566072;white-space:nowrap" aria-hidden="true">La Ventana Tango</span>
+      </div>
+    </div>
+  </section>
 
-<!-- CTA FINAL -->
-<section id="cta-final">
-  <div class="cta-title">Tu negocio merece algo más<br>que una <em>corazonada</em>.</div>
-  <p class="cta-sub">Una conversación de 15 minutos puede cambiar cómo manejás tu negocio para siempre.</p>
-  <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" target="_blank" class="btn-p">Quiero empezar →</a>
-</section>
+  <!-- 06 · QUIÉN ESTÁ DETRÁS -->
+  <section id="nosotros" style="max-width:1200px;margin:0 auto;padding:88px clamp(20px,4vw,56px)">
+    <div class="grid-bio" style="display:grid;grid-template-columns:1fr 1.4fr;gap:56px;align-items:start">
+      <div>
+        <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">06 — Quién está detrás</div>
+        <div style="position:relative;max-width:340px;margin-bottom:20px">
+          <div style="position:absolute;left:-10px;top:14px;bottom:-10px;right:14px;background:#111827;border-radius:18px"></div>
+          <img src="assets/lenrik-foto.jpeg" alt="Lenrik Guerrero, fundador de Pymetrics" width="340" height="408" style="position:relative;display:block;width:100%;aspect-ratio:4/4.8;object-fit:cover;object-position:center 28%;border-radius:16px;box-shadow:0 16px 40px rgba(16,24,40,.18)"/>
+          <span style="position:absolute;right:-8px;bottom:6px;width:44px;height:44px;border-radius:12px;background:#F2B541;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(242,181,65,.45)"><svg width="24" height="24" viewBox="0 0 40 40" fill="none"><rect x="0" y="26" width="7" height="14" rx="1.5" fill="#111827" opacity=".4"></rect><rect x="10" y="20" width="7" height="20" rx="1.5" fill="#111827" opacity=".6"></rect><rect x="20" y="12" width="7" height="28" rx="1.5" fill="#111827" opacity=".8"></rect><rect x="30" y="4" width="7" height="36" rx="1.5" fill="#111827"></rect><line x1="2" y1="36" x2="36" y2="5" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></line></svg></span>
+        </div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-.01em">Lenrik Guerrero</div>
+        <div style="font-size:14px;color:#8A93A3;font-weight:600;margin-top:2px">Fundador · Pymetrics</div>
+        <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+          <a href="https://ig.me/m/lenrikguerrero" class="btn-outline" style="display:inline-flex;align-items:center;height:40px;padding:0 16px;border:1px solid #D6DAE1;border-radius:10px;font-size:13.5px;font-weight:700;color:#111827">@lenrikguerrero</a>
+          <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" class="btn-navy" style="display:inline-flex;align-items:center;height:40px;padding:0 16px;background:#111827;border-radius:10px;font-size:13.5px;font-weight:700;color:#FFFFFF">WhatsApp directo</a>
+        </div>
+      </div>
+      <div>
+        <h2 style="margin:0 0 18px;font-weight:800;font-size:clamp(24px,2.8vw,34px);line-height:1.18;letter-spacing:-.02em;text-wrap:balance">El problema de los dueños de pymes no es el negocio. Es la falta de claridad.</h2>
+        <p style="margin:0 0 14px;font-size:16px;line-height:1.65;color:#566072;text-wrap:pretty">Vi de cerca cómo dueños trabajaban 12 horas al día sin saber si realmente estaban ganando dinero. Tenían clientes, tenían movimiento, pero los números nunca cerraban del todo.</p>
+        <p style="margin:0 0 26px;font-size:16px;line-height:1.65;color:#566072;text-wrap:pretty">No somos contadores ni auditores. Somos tu equipo de datos, trabajando para que puedas tomar las mejores decisiones siempre.</p>
+        <div class="grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+          <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:16px 18px"><div style="font-size:14.5px;font-weight:700;margin-bottom:3px">Claridad</div><div style="font-size:13.5px;color:#566072;line-height:1.5">Información que cualquier dueño entiende, sin jerga técnica.</div></div>
+          <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:16px 18px"><div style="font-size:14.5px;font-weight:700;margin-bottom:3px">Precisión</div><div style="font-size:13.5px;color:#566072;line-height:1.5">Datos auditados y conciliados. Lo que dice el número, es.</div></div>
+          <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:16px 18px"><div style="font-size:14.5px;font-weight:700;margin-bottom:3px">Recurrencia</div><div style="font-size:13.5px;color:#566072;line-height:1.5">Todos los meses, sin falta. Tu negocio no para, nosotros tampoco.</div></div>
+          <div style="background:#FFFFFF;border-radius:12px;box-shadow:0 1px 2px rgba(16,24,40,.06);padding:16px 18px"><div style="font-size:14.5px;font-weight:700;margin-bottom:3px">Privacidad</div><div style="font-size:13.5px;color:#566072;line-height:1.5">Tus datos son solo tuyos. Sistema privado, sin terceros.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="f-logo">Pymetrics</div>
-  <div class="f-links">
-    <a href="#servicio">Cómo funciona</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#clientes">Clientes</a>
-    <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" target="_blank">Contacto</a>
-  </div>
-  <div class="f-copy">Argentina · Venezuela · LATAM</div>
-</footer>
+  <!-- 07 · FAQ -->
+  <section style="background:#EDF0F4;padding:88px 0">
+    <div style="max-width:860px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <div style="font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#8A93A3;margin-bottom:16px">07 — Preguntas frecuentes</div>
+      <h2 style="margin:0 0 36px;font-weight:800;font-size:clamp(26px,3vw,38px);line-height:1.12;letter-spacing:-.02em">Lo que todos preguntan.</h2>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <details style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06)">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-size:16px;font-weight:700"><span>¿Qué diferencia hay con un contador?</span><svg class="pm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A3" stroke-width="2.2" style="flex-shrink:0;transition:transform .2s cubic-bezier(.22,.61,.36,1)"><path d="M6 9l6 6 6-6"></path></svg></summary>
+          <p style="margin:0;padding:0 24px 20px;font-size:15px;line-height:1.6;color:#566072;text-wrap:pretty">El contador mira hacia atrás: registra lo que ya pasó y se lo declara al fisco. Nosotros miramos el presente y el futuro. No somos excluyentes — muchos clientes tienen contador y también trabajan con Pymetrics.</p>
+        </details>
+        <details style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06)">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-size:16px;font-weight:700"><span>¿Necesito tener mis datos ordenados para empezar?</span><svg class="pm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A3" stroke-width="2.2" style="flex-shrink:0;transition:transform .2s cubic-bezier(.22,.61,.36,1)"><path d="M6 9l6 6 6-6"></path></svg></summary>
+          <p style="margin:0;padding:0 24px 20px;font-size:15px;line-height:1.6;color:#566072;text-wrap:pretty">No. Trabajamos con lo que tenés, en el formato que lo tenés. Parte del trabajo inicial es organizar, limpiar y estructurar tu información.</p>
+        </details>
+        <details style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06)">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-size:16px;font-weight:700"><span>¿Para qué tipo de negocio es Pymetrics?</span><svg class="pm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A3" stroke-width="2.2" style="flex-shrink:0;transition:transform .2s cubic-bezier(.22,.61,.36,1)"><path d="M6 9l6 6 6-6"></path></svg></summary>
+          <p style="margin:0;padding:0 24px 20px;font-size:15px;line-height:1.6;color:#566072;text-wrap:pretty">Para cualquier pyme que quiera controlar sus números. Mucha experiencia en gastronomía; también comercios y servicios en Argentina, Venezuela y LATAM.</p>
+        </details>
+        <details style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06)">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-size:16px;font-weight:700"><span>¿Los datos de mi empresa están seguros?</span><svg class="pm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A3" stroke-width="2.2" style="flex-shrink:0;transition:transform .2s cubic-bezier(.22,.61,.36,1)"><path d="M6 9l6 6 6-6"></path></svg></summary>
+          <p style="margin:0;padding:0 24px 20px;font-size:15px;line-height:1.6;color:#566072;text-wrap:pretty">Sí. Sistema privado desarrollado internamente, sin conexión con organismos gubernamentales ni terceros. Solo tu equipo y Pymetrics tienen acceso.</p>
+        </details>
+        <details style="background:#FFFFFF;border-radius:14px;box-shadow:0 1px 2px rgba(16,24,40,.06)">
+          <summary style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-size:16px;font-weight:700"><span>¿Trabajan online?</span><svg class="pm-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A93A3" stroke-width="2.2" style="flex-shrink:0;transition:transform .2s cubic-bezier(.22,.61,.36,1)"><path d="M6 9l6 6 6-6"></path></svg></summary>
+          <p style="margin:0;padding:0 24px 20px;font-size:15px;line-height:1.6;color:#566072;text-wrap:pretty">Sí, 100% online en toda LATAM. También presencial según disponibilidad en Buenos Aires, Caracas y Estado Zulia.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script>
-/* ---- Dashboard: vistas estilo app real (tablas + cuadritos) ---- */
-const iaChartData = {
-  labels:['Tiempo de carga','Errores'],
-  datasets:[
-    { label:'Carga manual',  data:[100,100], backgroundColor:'#111827', borderRadius:6 },
-    { label:'Con agente IA', data:[12,8],    backgroundColor:'#F2B541', borderRadius:6 }
-  ]
-};
-let iaChart;
-function initIaChart(){
-  const ctx=document.getElementById('sysChart'); if(!ctx||iaChart) return;
-  iaChart=new Chart(ctx,{ type:'bar', data:JSON.parse(JSON.stringify(iaChartData)),
-    options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ labels:{ color:'#4B5563', font:{family:'Plus Jakarta Sans', size:11}, boxWidth:12 } } },
-      scales:{
-        x:{ ticks:{ color:'#6B7280', font:{family:'Plus Jakarta Sans', size:11} }, grid:{ display:false } },
-        y:{ max:110, ticks:{ color:'#6B7280', font:{family:'Plus Jakarta Sans', size:10}, callback:v=>v+'%' }, grid:{ color:'#E5E7EB' } }
-      } } });
-}
-function switchChart(type){
-  const views={pl:'view-pl',cashflow:'view-cf',proyectado:'view-pr',ia:'view-ia'};
-  const tabs={pl:'tab-pl',cashflow:'tab-cf',proyectado:'tab-pr',ia:'tab-ia'};
-  Object.values(views).forEach(id=>{const el=document.getElementById(id); if(el) el.hidden=true;});
-  Object.values(tabs).forEach(id=>document.getElementById(id).classList.remove('on'));
-  document.getElementById(views[type]).hidden=false;
-  document.getElementById(tabs[type]).classList.add('on');
-  if(type==='ia') setTimeout(initIaChart,30);
-}
+  <!-- CIERRE -->
+  <section style="background:#111827;padding:96px 0 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,56px);text-align:center">
+      <h2 style="margin:0 auto 14px;font-weight:800;font-size:clamp(32px,4.2vw,54px);line-height:1.08;letter-spacing:-.025em;color:#FFFFFF;max-width:20ch;text-wrap:balance">Tu negocio merece algo más que una corazonada.</h2>
+      <p style="margin:0 auto 36px;font-size:17px;line-height:1.6;color:#8B95A7;max-width:46ch;text-wrap:pretty">Una conversación de 15 minutos puede cambiar cómo manejás tu negocio para siempre.</p>
+      <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" class="btn-amber" style="display:inline-flex;align-items:center;gap:9px;height:54px;padding:0 32px;background:#F2B541;color:#111827;border-radius:12px;font-size:16px;font-weight:700">Quiero empezar<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div style="max-width:1200px;margin:72px auto 0;padding:24px clamp(20px,4vw,56px);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;font-size:13px;color:#5E6A7E;flex-wrap:wrap;gap:10px">
+      <span>Pymetrics · Agencia de procesamiento de datos</span>
+      <span>Argentina · Venezuela · LATAM</span>
+    </div>
+  </section>
 
-/* ---- FAQ ---- */
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const it=q.parentElement; const was=it.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!was) it.classList.add('open');
-  });
-});
-
-/* ---- Reveal ---- */
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
+</div>
 </body>
 </html>
