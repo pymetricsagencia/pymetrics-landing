@@ -59,6 +59,8 @@ details[open] .pm-chev{transform:rotate(180deg)}
   .grid-4{grid-template-columns:repeat(2,1fr)!important}
   .grid-tech{grid-template-columns:1fr!important;gap:36px!important}
   .grid-bio{grid-template-columns:1fr!important;gap:40px!important}
+  .grid-casos{grid-template-columns:1fr!important;gap:48px!important}
+  .grid-casos>div+div{padding-left:0!important;border-left:0!important;padding-top:48px;border-top:1px solid rgba(255,255,255,.1)}
 }
 @media (max-width:760px){
   .nav-links{display:none!important}
@@ -90,7 +92,7 @@ details[open] .pm-chev{transform:rotate(180deg)}
         <div class="nav-links" style="display:flex;align-items:center;gap:26px">
           <a href="#como-funciona" class="nav-link">Cómo funciona</a>
           <a href="#servicios" class="nav-link">Servicios</a>
-          <a href="#clientes" class="nav-link">Clientes</a>
+          <a href="#casos" class="nav-link">Clientes</a>
           <a href="#nosotros" class="nav-link">Nosotros</a>
         </div>
         <a href="https://wa.me/5491137823285?text=Hola%20Len!%20Quiero%20informaci%C3%B3n%20sobre%20Pymetrics" data-cta="whatsapp" data-lugar="nav" class="btn-amber" style="display:inline-flex;align-items:center;height:42px;padding:0 20px;background:#F2B541;color:#111827;border-radius:10px;font-weight:700;cursor:pointer">Quiero empezar →</a>
@@ -257,7 +259,7 @@ details[open] .pm-chev{transform:rotate(180deg)}
       <!-- mini dashboard mock -->
       <div style="background:#111827;border-radius:18px;padding:20px;box-shadow:0 24px 60px rgba(16,24,40,.25)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-          <span style="font-size:12px;font-weight:700;color:#FFFFFF">Pymetrics App · Dashboard</span>
+          <span style="font-size:12px;font-weight:700;color:#FFFFFF">Pymetrics App · Ejemplo</span>
           <span style="display:flex;gap:6px"><span style="padding:3px 9px;border-radius:9999px;background:#F2B541;color:#111827;font-size:10.5px;font-weight:800">P&amp;L</span><span style="padding:3px 9px;border-radius:9999px;background:#1B2434;color:#8B95A7;font-size:10.5px;font-weight:700">Cashflow</span><span style="padding:3px 9px;border-radius:9999px;background:#1B2434;color:#8B95A7;font-size:10.5px;font-weight:700">Carga IA</span></span>
         </div>
         <div style="background:#FFFFFF;border-radius:12px;padding:16px">
@@ -265,12 +267,50 @@ details[open] .pm-chev{transform:rotate(180deg)}
           <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="color:#566072;font-weight:500">Costo de mercadería</span><span style="font-weight:700;color:#DC2626;font-variant-numeric:tabular-nums">−$1.600.000</span></div>
           <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="font-weight:700">Utilidad bruta</span><span style="font-weight:800;font-variant-numeric:tabular-nums">$1.240.000</span></div>
           <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #E7E9EE;font-size:13px"><span style="color:#566072;font-weight:500">Gastos operativos</span><span style="font-weight:700;color:#DC2626;font-variant-numeric:tabular-nums">−$680.000</span></div>
-          <div style="display:flex;justify-content:space-between;padding:10px 0 2px;font-size:14px"><span style="font-weight:800">Resultado del mes</span><span style="font-weight:800;color:#16A34A;font-variant-numeric:tabular-nums">$560.000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0 2px;font-size:14px"><span style="font-weight:800">Resultado del mes</span><span style="font-weight:800;color:#15803D;font-variant-numeric:tabular-nums">$560.000</span></div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px">
-          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Tiempo de carga</div><div style="font-size:18px;font-weight:800;color:#F2B541;font-variant-numeric:tabular-nums">−88%</div></div>
-          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Errores</div><div style="font-size:18px;font-weight:800;color:#F2B541;font-variant-numeric:tabular-nums">−92%</div></div>
-          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:10px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Facturas</div><div style="font-size:14px;font-weight:800;color:#F2B541;margin-top:3px">Automática</div></div>
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:11px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Bancos</div><div style="font-size:14px;font-weight:800;color:#F2B541;margin-top:3px">Al centavo</div></div>
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:11px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Recetas</div><div style="font-size:14px;font-weight:800;color:#F2B541;margin-top:3px">Costo por plato</div></div>
+          <div style="background:#1B2434;border-radius:10px;padding:12px"><div style="font-size:11px;font-weight:700;color:#8B95A7;text-transform:uppercase;letter-spacing:.08em">Alertas</div><div style="font-size:14px;font-weight:800;color:#F2B541;margin-top:3px">Semanales</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASOS REALES -->
+  <section id="casos" style="background:#111827;padding:88px 0">
+    <div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,56px)">
+      <h2 style="margin:0 0 14px;font-weight:800;font-size:clamp(28px,3.4vw,42px);line-height:1.12;letter-spacing:-.02em;color:#FFFFFF;max-width:24ch;text-wrap:balance">Así trabajamos hoy con dos bares.</h2>
+      <p style="margin:0 0 56px;font-size:16px;line-height:1.6;color:#B6BFCC;max-width:56ch;text-wrap:pretty">Lo que hacemos cada mes con dos clientes activos. Sin estimaciones: son los números de su propio sistema.</p>
+      <div class="grid-casos" style="display:grid;grid-template-columns:1fr 1fr;gap:56px">
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div>
+            <h3 style="margin:0;font-size:24px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF">Cala</h3>
+            <div style="margin-top:4px;font-size:14px;font-weight:600;color:#8B95A7">Bar en San Isidro</div>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:4px">
+            <div style="font-size:clamp(34px,4vw,46px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#F2B541;font-variant-numeric:tabular-nums;white-space:nowrap">3 de 3</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#B6BFCC;max-width:36ch;text-wrap:pretty">cuentas bancarias conciliadas al centavo contra el extracto del banco.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:4px">
+            <div style="font-size:clamp(34px,4vw,46px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#F2B541;font-variant-numeric:tabular-nums;white-space:nowrap">Cada mes</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#B6BFCC;max-width:36ch;text-wrap:pretty">un cierre con informe para los socios: resultado, costo de mercadería, punto de equilibrio y deuda.</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:28px;padding-left:56px;border-left:1px solid rgba(255,255,255,.1)">
+          <div>
+            <h3 style="margin:0;font-size:24px;font-weight:800;letter-spacing:-.02em;color:#FFFFFF">Nob3l Bar</h3>
+            <div style="margin-top:4px;font-size:14px;font-weight:600;color:#8B95A7">Bar</div>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:4px">
+            <div style="font-size:clamp(34px,4vw,46px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#F2B541;font-variant-numeric:tabular-nums;white-space:nowrap">433 de 433</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#B6BFCC;max-width:36ch;text-wrap:pretty">acreditaciones del banco ligadas a la venta del día que les corresponde.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:4px">
+            <div style="font-size:clamp(34px,4vw,46px);font-weight:800;line-height:1;letter-spacing:-.03em;color:#F2B541;font-variant-numeric:tabular-nums;white-space:nowrap">185</div>
+            <p style="margin:0;font-size:15px;line-height:1.55;color:#B6BFCC;max-width:36ch;text-wrap:pretty">recetas costeadas: el costo real de cada plato y de cada trago.</p>
+          </div>
         </div>
       </div>
     </div>
